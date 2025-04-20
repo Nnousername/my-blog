@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Enhanced Blog</title>
+  <style>
+    body { font-family: sans-serif; margin: 0; background: #f4f4f4; color: #333; }
+    header, footer { background: #333; color: #fff; text-align: center; padding: 1em; }
+    .container { max-width: 1000px; margin: auto; padding: 1em; display: flex; gap: 1em; }
+    main { flex: 3; }
+    aside { flex: 1; background: #fff; padding: 1em; border-radius: 8px; }
+    article { background: #fff; padding: 1em; margin-bottom: 1em; border-radius: 8px; }
+    .tags span { background: #eee; margin-right: 5px; padding: 2px 6px; border-radius: 4px; cursor: pointer; }
+    #search { width: 100%; padding: 0.5em; margin-bottom: 1em; }
+    .comment-box textarea { width: 100%; height: 100px; }
+    .comment-box button { margin-top: 10px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>My Enhanced Blog</h1>
+  <p>Now with search, tags, and comments!</p>
+</header>
+
+<div class="container">
+  <main>
+    <input type="text" id="search" placeholder="Search posts..." onkeyup="searchPosts()">
+
+    <!-- Blog Post -->
+    <article class="post" data-tags="travel adventure">
+      <h2>Exploring the Mountains</h2>
+      <p><em>April 20, 2025</em></p>
+      <p>Join me on a scenic hike through breathtaking mountain ranges...</p>
+      <div class="tags">
+        <span onclick="filterByTag('travel')">#travel</span>
+        <span onclick="filterByTag('adventure')">#adventure</span>
+      </div>
+
+      <!-- Comment Section -->
+      <div class="comment-box">
+        <h4>Leave a comment:</h4>
+        <textarea placeholder="Your comment..."></textarea><br>
+        <button onclick="alert('This will be connected to a backend later!')">Post</button>
+      </div>
+    </article>
+
+    <!-- Add more posts below using the same structure -->
+
+  </main>
+
+  <aside>
+    <h3>Tags</h3>
+    <ul>
+      <li onclick="filterByTag('travel')">#travel</li>
+      <li onclick="filterByTag('adventure')">#adventure</li>
+      <li onclick="filterByTag('tech')">#tech</li>
+    </ul>
+  </aside>
+</div>
+
+<footer>
+  &copy; 2025 My Blog. Built for AdSense and beyond.
+</footer>
+
+<script>
+  function searchPosts() {
+    const keyword = document.getElementById('search').value.toLowerCase();
+    const posts = document.querySelectorAll('.post');
+    posts.forEach(post => {
+      post.style.display = post.innerText.toLowerCase().includes(keyword) ? 'block' : 'none';
+    });
+  }
+
+  function filterByTag(tag) {
+    const posts = document.querySelectorAll('.post');
+    posts.forEach(post => {
+      const tags = post.dataset.tags.toLowerCase().split(" ");
+      post.style.display = tags.includes(tag.toLowerCase()) ? 'block' : 'none';
+    });
+  }
+</script>
+
+</body>
+</html>
